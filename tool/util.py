@@ -9,7 +9,8 @@ from pdf2image import convert_from_path
 import os
 import json
 import tiktoken
-
+import sys
+sys.path.append('..')  # 添加父目录到Python路径
 
 def _split_sentences(text, split_char='。'):
     """
