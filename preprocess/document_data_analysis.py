@@ -1,3 +1,5 @@
+import sys
+sys.path.append('..')  # 添加父目录到Python路径
 from tool.util import *
 from datetime import datetime
 def analyze_tokens(input_filename, output_filename):
@@ -12,12 +14,11 @@ def analyze_tokens(input_filename, output_filename):
     max_tokens = 0
     total_count = 0
 
-    num = 0
     with open(input_filename, 'r') as file:
         for line in file:
-            num+=1
-            if num>10 :
-                break
+            # num+=1
+            # if num>10 :
+            #     break
             try:
                 data = json.loads(line)
                 ref_string = data.get('ref_string', '')
