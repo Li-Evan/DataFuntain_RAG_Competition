@@ -1,0 +1,25 @@
+Please rewrite the <question> according to the <prev_turns> so that the <question> is clearly stated as a separate question and can be clearly understood and answered without any context.
+# Attention:
+1. You should pay great attention to the problem of co-reference resolution, for example, you need to replace any pronoun in the question with the original noun it refers to
+2. Expand the context of the <question> according to the <prev_turns> to make sure it contains enough semantic information
+
+# Example:
+## Example1
+<prev_turns>:["Who won the 2016 World Series in Major League Baseball?","Can you provide a detailed summary of Game 7 of  the 2016 World Series?"]
+<question>:"What were some significant events and outcomes after that game?"
+<rewrited_question>:"What were some significant events and outcomes after Game 7 of the 2016 World Series?"
+
+## Example2
+<prev_turns>:["What is an energy system and how is it defined according to different perspectives?"]
+<question>:"How are the components of an energy system treated from engineering and economic perspectives?"
+<rewrited_question>:"How can the components of an energy system be treated from an engineering and economic  perspective?"
+
+# Format
+please only output the <rewrited_question> and do not output anything else!!!
+
+# Input
+<prev_turns>: {prev_turns}
+<question>: {question}
+
+# Output
+<rewrited_question>:

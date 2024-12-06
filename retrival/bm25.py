@@ -141,7 +141,7 @@ def demo_search():
     except Exception as e:
         print(f"Error during search: {str(e)}")
 
-def bm25():
+def bm25(question):
     documents = []
     file_path = r"../dataset/CORAL/deduplicate_passage_corpus.json"
     with open(file_path, 'r') as file:
@@ -157,23 +157,26 @@ def bm25():
     search_engine = DocumentSearchBM25(documents)
 
     # Example search
-    query = "Can you tell me more about his history with the Albania U21 national team?"
+    query = question
     limit_num = 10
-
+    bm25_retrival_document = []
     try:
         results = search_engine.search(query, limit_num)
         print(f"\nTop {limit_num} results for query: '{query}'")
         for idx, score, doc in results:
-            print(f"Document {idx} (Score: {score:.4f}): {doc}")
+            bm25_retrival_document.append(doc)
+            # print(f"Document {idx} (Score: {score:.4f}): {doc}")
 
         # Print statistics
-        stats = search_engine.get_document_statistics()
-        print("\nDocument Collection Statistics:")
-        for key, value in stats.items():
-            print(f"{key}: {value}")
+        # stats = search_engine.get_document_statistics()
+        # print("\nDocument Collection Statistics:")
+        # for key, value in stats.items():
+        #     print(f"{key}: {value}")
 
     except Exception as e:
         print(f"Error during search: {str(e)}")
+    return bm25_retrival_document
 
 if __name__ == "__main__":
-    bm25()
+    question = "Can you tell me more about his history with the Albania U21 national team?"
+    bm25(question)

@@ -53,3 +53,6 @@ def generate(prompt, temperature=1e-6, model_id=0):
     # print(response)
     del model
     return response
+
+if __name__ == '__main__':
+    pass
