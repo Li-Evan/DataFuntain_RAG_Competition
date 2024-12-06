@@ -1,3 +1,5 @@
+import os
+BASE_PATH = os.path.dirname(os.path.realpath(__file__))
 
 LLM_NAME = 'openai'
 IMAGE_LLM_NAME = 'openai'
@@ -12,3 +14,6 @@ OPENAI_API = "sk-eL1ew2Gg2f8EAVLi9612F133D2634b4b98Fc4dA665D03e91"
 OPENAI_BASE_URL = "https://api.openai-next.com/v1"
 OPENAI_MODEL = "gpt-4o-mini"
 OPENIA_EMBEDDING_MODEL = "text-embedding-ada-002"
+
+if __name__ == '__main__':
+    print(BASE_PATH)

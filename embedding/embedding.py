@@ -38,8 +38,7 @@ def _embedding_openai(text):
 def _embedding_bge_en_m3(text,cuda=1,model_path='/home/models/bge-m3'):
     model = FlagAutoModel.from_finetuned(model_path,
                                          query_instruction_for_retrieval="Represent this sentence for searching relevant passages:",
-                                         use_fp16=True,
-                                         device=f"cuda:{cuda}")
+                                         use_fp16=True)
     sentences = [text]
     embed_text = model.encode(sentences)
     return embed_text

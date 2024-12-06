@@ -4,6 +4,7 @@ from tool.util import *
 import chroma as chroma
 from embedding.dense import *
 import json
+import os
 
 def _study_single_text(db_path, collection_name, text):
     print(f"Studying {text}")
@@ -34,8 +35,10 @@ if __name__ == '__main__':
                 documents.append(ref_string)
             except:
                 pass
-    # documents = documents[:10]
+    # documents = documents[:1000]
     # print(len(documents))
+    import time
+    start = time.time()
     # 2. 使用Embedding模型进行同步Embedding
     embed_documents = embedding_text(documents,embedding_name="bge-m3")
 
@@ -47,5 +50,9 @@ if __name__ == '__main__':
     collection = chroma.get_collection(db_path, collection_name)
     for document,embed_document in zip(documents,embed_documents):
         chroma.add_single_collection(collection, document, embed_document)
+
+    end = time.time()
+    print(start-end)
     chroma.count_collection(db_path)
+
     # chroma.show_collection(collection)

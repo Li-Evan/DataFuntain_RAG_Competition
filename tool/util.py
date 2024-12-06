@@ -10,7 +10,9 @@ import os
 import json
 import tiktoken
 import sys
+
 sys.path.append('..')  # 添加父目录到Python路径
+
 
 def _split_sentences(text, split_char='。'):
     """
@@ -121,6 +123,7 @@ def truncate_string(input_string, chunk_size=2000):
     chunks = [input_string[i:i + chunk_size] for i in range(0, len(input_string), chunk_size)]
     return chunks
 
+
 def count_tokens(text, model="gpt-3.5-turbo"):
     # 加载与指定模型兼容的编码器
     encoding = tiktoken.encoding_for_model(model)
@@ -129,7 +132,7 @@ def count_tokens(text, model="gpt-3.5-turbo"):
     return len(tokens)
 
 
-def split_long_text(string_list, max_tokens=512, model="gpt-3.5-turbo",gap_sentence=1):
+def split_long_text(string_list, max_tokens=512, model="gpt-3.5-turbo", gap_sentence=1):
     split_string_list = []
     temp_list = []
 
@@ -152,17 +155,30 @@ def split_long_text(string_list, max_tokens=512, model="gpt-3.5-turbo",gap_sente
 
     return split_string_list
 
+
+def reflect_doc_to_dict():
+    file_path = r"dataset/CORAL/deduplicate_passage_corpus.json"
+    reflect_dict = {}
+    with open(file_path, 'r') as file:
+        for line in file:
+            try:
+                data = json.loads(line)
+                ref_string = data.get('ref_string', '')
+                ref_id = data.get('ref_id', '')
+                reflect_dict[ref_string] = ref_id
+            except:
+                pass
+    return reflect_dict
+
+
 if __name__ == '__main__':
 
     file_path = r"C:\Users\Evan\Desktop\zju-rag-edu\algorithm\original_data\学术写作书籍\写作过程层面\2.做研究是有趣的：给学术新人的科研入门笔记 (刀熊) (Z-Library)_json\第三部分__深耕学术写作：从风格到结构.json"
 
-
-
     with open(file_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    for key,value in data.items():
+    for key, value in data.items():
         print(len(value))
         chunks = truncate_string(value)
         print(len(chunks))
-

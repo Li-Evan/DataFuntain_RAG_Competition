@@ -1,5 +1,5 @@
 from embedding.embedding import *
-from summary.summary import *
+from rewrite.summary import *
 from retrival.retrival import *
 from rerank.rerank import *
 from generate.generate import *
